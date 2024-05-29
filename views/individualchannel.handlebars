@@ -1,0 +1,78 @@
+    <header>
+      <h1>{{channel.channelTitle}}</h1>
+    </header>
+
+    <div>
+      <div id="channelDetails">
+        <h2>Channel Overview</h2>
+        <p>Description: {{channel.channelDescription}}</p>
+        <p>Owner: {{channel.channelOwnerName}}</p>
+        <p>Website:
+          <a
+            href="{{channel.website}}"
+            target="_blank"
+          >{{channel.website}}</a></p>
+        <p>Keywords:
+          {{#each channel.keywords}}{{this}}{{#unless @last}},
+            {{/unless}}{{/each}}</p>
+        <p>Categories:
+          {{#each channel.categories}}{{this}}{{#unless @last}},
+            {{/unless}}{{/each}}</p> 
+        <p>Average Rating: {{channel.averageRating}}</p>
+        <p>Parental Guidance Age: {{channel.startingAge}}</p>
+        <div>
+          <!-- Add New Review Form -->
+          <form method="POST" id="addReviewForm" action="/channels/{{channel._id}}/reviews">
+            <p>Add review here:</p>
+            <div id="addReviewError">{{error}}</div>
+            <label for="reviewTitle">Review Title:</label>
+            <input type="text" id="reviewTitle" name="reviewTitle" required><br>
+            <label for="reviewDescription">Review Description:</label>
+            <input type="text" id="reviewDescription" name="reviewDescription" required><br>
+            <label for="reviewRating">Rating:</label>
+            <input type="text" id="reviewRating" name="reviewRating" required><br>
+            <button type="submit">Add Review</button>
+          </form>
+        </div>
+        <h3>Reviews</h3>
+        <ul id="reviewsList">
+          <li id="reviewError">{{error}}</li>
+          {{#if channel.reviews.length}}
+            {{#each channel.reviews}}
+               <li id="review-{{this._id}}">
+                <div class="reviewer-name">Reviewed by: {{this.reviewerName}}</div>
+                <div class="review-title">Title: {{this.title}}</div>
+                <div class="review-description">Review: {{this.review}}</div>
+                <div class="review-rating">Rating: {{this.rating}}</div>
+                <button onclick="removeReview('{{this._id}}')">Remove Review</button>
+                <div class="review-comments">
+                  <h4>Comments:</h4>
+                  <ul>
+                    {{#if this.comments}}
+                      {{#each this.comments}}
+                        <li>{{this.commenterName}}: {{this.text}}</li>
+                      {{/each}}
+                    {{else}}
+                      <p>No comments yet.</p>
+                    {{/if}}
+                  </ul>
+                </div>
+                <!-- Comment submission form -->
+                <form action="/channels/{{../channel._id}}/reviews/{{this._id}}/comments" method="POST">
+                  <input type="text" name="comment" placeholder="Enter your comment" required>
+                  <button type="submit">Add Comment</button>
+                </form>
+
+              </li>
+            {{/each}}
+        {{else}}
+          <p>No reviews yet.</p>
+        {{/if}}
+      </ul>
+      </div>
+      <a href="/channels">Go back to main page</a>
+    </div>
+    <script src="/public/js/clientside_validation.js"></script>
+
+
+  

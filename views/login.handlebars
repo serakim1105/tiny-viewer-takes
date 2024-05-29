@@ -1,0 +1,21 @@
+<h1>Login</h1>
+<div id="error-message">{{error}}</div>
+<form id="login-form" action="/login" method="POST">
+  <div>
+    <label for="emailAddressInput">Email Address:</label>
+    <input
+      type="email"
+      id="emailAddressInput"
+      name="emailAddressInput"
+      required
+    />
+  </div>
+  <div>
+    <label for="passwordInput">Password:</label>
+    <input type="password" id="passwordInput" name="passwordInput" required />
+  </div>
+  <button type="submit">Login</button>
+</form>
+<p>Don't have an account?
+  <a href="/register">Click here to register!</a></p>
+<a href="/channels">Go back to main page</a>

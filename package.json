@@ -1,0 +1,27 @@
+{
+  "name": "tiny-viewer-takes",
+  "version": "1.0.0",
+  "description": "Priscilla\r Sera\r John\r Khalid\r Vivek",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "seed": "node ./task/seed.js",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "Khalid Isahak: 20017262",
+  "author2": "Sera Kim: 20016580",
+  "author3": "John Wright: 20021722",
+  "author4": "Priscilla Lin: 20011882",
+  "author5": "Vivek Kumar Diwakar: 20018845,",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.19.2",
+    "express-handlebars": "^7.1.2",
+    "express-session": "^1.18.0",
+    "mongodb": "^6.5.0",
+    "nodemon": "^3.1.0",
+    "xss": "^1.0.15"
+  }
+}

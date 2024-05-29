@@ -1,0 +1,86 @@
+<header>
+  <h1>{{title}}</h1>
+</header>
+
+<div>
+  {{#if loggedIn}}
+    <p><a href="/logout">Logout</a></p>
+  {{else}}
+    <p><a id="loginButton" href="/login">Login Here</a></p>
+  {{/if}}
+  <div>
+    <a href="?sort=rating">Sort by Rating</a>
+    |
+    <a href="?sort=age">Sort by Age</a>
+  </div>
+
+  <a href="/channels">Go back to main page</a>
+
+  <form id="searchForm">
+    <label for="search_term">Search Channels:</label>
+    <input type="text" id="search_term" name="search_term" />
+    <button type="submit">Search</button>
+  </form>
+
+  <form id="searchKeywordForm">
+    <label for="search_keyword">Search Channels (By Keyword):</label>
+    <input type="text" id="search_keyword" name="search_keyword" />
+    <button type="submit">Search</button>
+  </form>
+
+  <!-- Displaying the message if any -->
+  {{#if message}}
+    <p>{{message}}</p>
+  {{/if}}
+
+  <!-- List of channels -->
+  <ul id="channelList">
+    {{#each channels}}
+      <li>
+        <a
+          href="/channels/{{this._id}}"
+          data-id="{{this._id}}"
+        >{{this.channelTitle}}</a>
+        - Rating:
+        {{this.averageRating}}
+        - Parential Guidance Age:
+        {{this.startingAge}}
+
+      </li>
+    {{/each}}
+  </ul>
+</div>
+
+<div>
+  <!-- Add New Channel Form -->
+  <form method="POST" id="addChannelForm">
+    <p>Add new channel here:</p>
+    <div id="errorDisplay">{{error}}</div>
+    <label for="channelTitle">Channel Title:</label>
+    <input type="text" id="channelTitle" name="channelTitle" /><br />
+    <label for="channelOwnerName">Channel Owner Name:</label>
+    <input type="text" id="channelOwnerName" name="channelOwnerName" /><br />
+    <label for="channelDescription">Channel Description:</label>
+    <input type="text" id="channelDescription" name="channelDescription" /><br
+    />
+
+    <label for="channelWebsite">Channel Website:</label>
+    <input type="text" id="channelWebsite" name="channelWebsite" /><br />
+    <label for="keywords">Keywords(Optional):</label>
+    <input type="text" id="keywords" name="keywords" /><br />
+    <label for="categories">Categories(Optional):</label>
+    <input type="text" id="categories" name="categories" /><br />
+    <label for="startingAge">Parental Guidance Age:</label>
+    <input type="text" id="startingAge" name="startingAge" /><br />
+    <button type="submit">Add New Channel</button>
+  </form>
+</div>
+
+<footer>
+  <p>TinyViewerTakes</p>
+</footer>
+
+<script
+  src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+></script>
+<script src="/public/js/clientside_validation.js"></script>
